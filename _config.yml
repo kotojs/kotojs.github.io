@@ -1,0 +1,22 @@
+# Site settings
+title: Koto
+email: info@kotojs.org
+description: "A d3 chart framework for reusable charts"
+baseurl: ""
+url: "http://kotojs.org"
+twitter_username: kotojs
+github_username:  "nicksrandall/kotojs"
+facebook_username:  kotojs
+
+# Build settings
+markdown: kramdown
+highlighter: pygments
+permalink: pretty
+paginate: 5
+paginate_path: "/blog/page:num/"
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+
+# Collections
+collections:
+  docs:
+    output: true
