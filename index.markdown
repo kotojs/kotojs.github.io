@@ -147,7 +147,7 @@ Build requirements:
 
 {% highlight bash %}
 $ npm install
-$ gulp build
+$ npm run build
 {% endhighlight %}
 
 ## Community
