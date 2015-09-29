@@ -3,23 +3,15 @@ layout: page
 description: "A d3 framework for reusable charts"
 ---
 
-# Koto
-
-A framework for creating reusable charts with [D3.js](http://d3js.org), written in ES6.
-
-[![Travis build status](http://img.shields.io/travis/kotojs/kotojs.svg?style=flat)](https://travis-ci.org/nicksrandall/kotojs)
-[![Code Climate](https://codeclimate.com/github/kotojs/kotojs/badges/gpa.svg)](https://codeclimate.com/github/nicksrandall/kotojs)
-[![Test Coverage](https://codeclimate.com/github/kotojs/kotojs/badges/coverage.svg)](https://codeclimate.com/github/nicksrandall/kotojs)
-[![Dependency Status](https://david-dm.org/kotojs/kotojs.svg)](https://david-dm.org/nicksrandall/kotojs)
-[![devDependency Status](https://david-dm.org/kotojs/kotojs/dev-status.svg)](https://david-dm.org/nicksrandall/kotojs#info=devDependencies)
-[![Join the chat at https://gitter.im/kotojs/kotojs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nicksrandall/kotojs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+#Koto
+**koto.js** is a [d3.js](http://www.d3js.org) charting framework written in ES6, the latest iteration of javascript.
 
 ## Introduction
 KotoJS is **HEAVILY** inspired by another reusable charting framework maintained by the Miso Project called d3.chart. I think that project is well designed and well documented.  For those who are not familiar with d3.chart, the framework provides a logical way to ensure that all data-visualization components that are authored using the framework are done in a way that facilitates re-usablily. 
 
 However, as somebody who greatly depends on the d3.chart framework, I've gotten concerned that support for the project has dwindled over the past several months. This has prompted me to write my own reusable charting framework, taking all the things the things that I really like about d3.chart and adding a few things that I had always wanted.
 
-```js
+{% highlight javascript %}
 // Basic Example
 KotoBarChart = class extends Koto {
   constructor(selection){
@@ -54,7 +46,7 @@ KotoBarChart = class extends Koto {
 
 var barChart = new KotoBarChart(d3.select('#vis'));
 barChart.draw(data);
-```
+{% endhighlight %}
 
 ### How is it different than d3.chart?
 
@@ -67,7 +59,7 @@ I'm a big believer in modules. With KotoJS, all your components are exported as 
 #### Common API for getting and setting configurable options.
 In d3.chart, it is a common practice to have each configurable option (ex. Height, Widgth, fill) to have its own getter and setter method attached to the chart. This practice is suggested by Mike Bostock (creator of D3) and generally a good thing. For my own personal use case of this framework, I need the abily to store all the configs to a single object and so I found it much easier to have a common API for getting and setting config items like so:
 
-```js
+{% highlight javascript %}
 // Similar syntax to other d3 methods like `attr` and `style`
 var barChart = new KotoBarChart(d3.select('#vis'));
 
@@ -84,12 +76,12 @@ barChart
   })
   .draw(data);
 
-```
+{% endhighlight %}
 
 #### Common API for getting and setting accessor functions.
 In an effort to make components authored with this framework truely reusable, it was important to me that widgets could take in data with a variety of schemas. I can then tell my component how to "access" the data that it needs.
 
-```js
+{% highlight javascript %}
 // Similar syntax to other d3 methods like `attr` and `style`
 var barChart = new KotoBarChart(d3.select('#vis'));
 
@@ -106,7 +98,7 @@ barChart
   })
   .draw(data);
 
-```
+{% endhighlight %}
 
 #### Extra Hooks
 In d3.chart, the only "hooks" that were available for you on the chart level was `initialize` and `transform`. In KotoJS I have extended the list to include `initialize`, `transform`, `preDraw`, and `postDraw`. I have also exposed a `hasDrawn` property that allows for you check if something is being "re-drawn". All of the hooks are optional so you don't have to use them if you don't want to.
@@ -114,7 +106,7 @@ In d3.chart, the only "hooks" that were available for you on the chart level was
 #### Removed the extension of d3
 In d3.chart, the API for initalizing a chart was an extension of d3's selection prototype. I felt wrong to me to extend d3 so I have removed the need to do that and have opted to have charts authored with KotoJS to initialize like any other constructor function.
 
-```js
+{% highlight javascript %}
 // d3.chart
 var barChart = d3.select('#vis').chart('BarChart');
 barChart.draw(data);
@@ -122,7 +114,7 @@ barChart.draw(data);
 // KotoJS
 var barChart = new KotoBarChart(d3.select('#vis'));
 barChart.draw(data);
-```
+{% endhighlight %}
 
 ## Getting Started
 `koto.js` has been written in [ES6](https://babeljs.io/docs/learn-es6/) and then transpired to ES5 with [babel](https://babeljs.io/). It uses the UMD syntax so that it can be integrated with many module/bundle loaders.
@@ -130,18 +122,22 @@ barChart.draw(data);
 ### Install
 You can install koto via [bower](http://bower.io) by running:
 
-```bash
+{% highlight bash %}
 $ bower install koto --save
-```
+{% endhighlight %}
 
 or via [npm](http://www.npmjs.com) by running:
 
-```bash
+{% highlight bash %}
 $ npm install koto --save
-```
+{% endhighlight %}
 
 ## Documentation
-Browse the [Wiki](https://github.com/nicksrandall/kotojs/wiki/API-Documentation).
+Browse the [Docs](http://kotojs.org/docs/).
+
+### Example Charts
+* [Icicle Chart (github)](https://github.com/nicksrandall/koto.Icicle)
+* More coming soon
 
 ## Build Instructions
 Build requirements:
@@ -149,13 +145,13 @@ Build requirements:
 - [Node 0.10+](http://www.nodejs.org)
 
 
-```js
+{% highlight bash %}
 $ npm install
-$ npm run build
-```
+$ gulp build
+{% endhighlight %}
 
 ## Community
-The goal is to have a large library of pre-built widgets using this framework open sourced and available for all to use. I'm still thinking through the details but be expecting something to be released soon. If you'd like to contribute a widget (or 2 or 42), I'd welcome the support. 
+The goal is to have a large library of pre-built widgets using this framework open sourced and available for all to use. I'm still thinking through the details but be expecting something to be released soon. If you'd like to contribute a widget (or 2 or 43), I'd welcome the support. 
 
 ## Acknowledgements
 This project is **HEAVILY** inspired by the awesome work done by @jugglinmike and @iros and their charting framework called [d3.chart](https://github.com/misoproject/d3.chart).
