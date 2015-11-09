@@ -6,6 +6,13 @@ description: "A d3 framework for reusable charts"
 #Koto
 **koto.js** is a [d3.js](http://www.d3js.org) charting framework written in ES6, the latest iteration of javascript.
 
+[![Travis build status](http://img.shields.io/travis/kotojs/kotojs.svg?style=flat)](https://travis-ci.org/kotojs/kotojs)
+[![Code Climate](https://codeclimate.com/github/kotojs/kotojs/badges/gpa.svg)](https://codeclimate.com/github/kotojs/kotojs)
+[![Coverage Status](https://coveralls.io/repos/kotojs/kotojs/badge.svg?branch=master&service=github)](https://coveralls.io/github/kotojs/kotojs?branch=master)
+[![Dependency Status](https://david-dm.org/kotojs/kotojs.svg)](https://david-dm.org/kotojs/kotojs)
+[![devDependency Status](https://david-dm.org/kotojs/kotojs/dev-status.svg)](https://david-dm.org/kotojs/kotojs#info=devDependencies)
+[![Join the chat at https://gitter.im/kotojs/kotojs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kotojs/kotojs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Introduction
 KotoJS is **HEAVILY** inspired by another reusable charting framework maintained by the Miso Project called d3.chart. I think that project is well designed and well documented.  For those who are not familiar with d3.chart, the framework provides a logical way to ensure that all data-visualization components that are authored using the framework are done in a way that facilitates re-usablily. 
 
@@ -13,9 +20,9 @@ However, as somebody who greatly depends on the d3.chart framework, I've gotten 
 
 {% highlight javascript %}
 // Basic Example
-KotoBarChart = class extends Koto {
-  constructor(selection){
-    // setup chart
+koto.BarChart = class extends koto.Base {
+	constructor(selection){
+		// setup chart
     var bars = this.base.append('g').classed('bars', true);
     
     // define layer
@@ -38,13 +45,13 @@ KotoBarChart = class extends Koto {
     .on('exit', function () {
       // this => exit selection
     });
-  }
-  preDraw(data) {
-    // [Optional] Do something before draw
-  }
+	}
+	preDraw(data) {
+		// [Optional] Do something before draw
+	}
 }
 
-var barChart = new KotoBarChart(d3.select('#vis'));
+var barChart = new koto.BarChart(d3.select('#vis'));
 barChart.draw(data);
 {% endhighlight %}
 
@@ -61,7 +68,7 @@ In d3.chart, it is a common practice to have each configurable option (ex. Heigh
 
 {% highlight javascript %}
 // Similar syntax to other d3 methods like `attr` and `style`
-var barChart = new KotoBarChart(d3.select('#vis'));
+var barChart = new koto.BarChart(d3.select('#vis'));
 
 barChart
   .config('height', 500)
@@ -83,7 +90,7 @@ In an effort to make components authored with this framework truely reusable, it
 
 {% highlight javascript %}
 // Similar syntax to other d3 methods like `attr` and `style`
-var barChart = new KotoBarChart(d3.select('#vis'));
+var barChart = new koto.BarChart(d3.select('#vis'));
 
 barChart
   .accessor('name', function(d) { return d.country; })
@@ -97,7 +104,6 @@ barChart
     value: function(d) { return d.population; }
   })
   .draw(data);
-
 {% endhighlight %}
 
 #### Extra Hooks
@@ -112,7 +118,7 @@ var barChart = d3.select('#vis').chart('BarChart');
 barChart.draw(data);
 
 // KotoJS
-var barChart = new KotoBarChart(d3.select('#vis'));
+var barChart = new koto.BarChart(d3.select('#vis'));
 barChart.draw(data);
 {% endhighlight %}
 
@@ -133,25 +139,31 @@ $ npm install koto --save
 {% endhighlight %}
 
 ## Documentation
-Browse the [Docs](http://kotojs.org/docs/).
+Browse the [Wiki](https://github.com/nicksrandall/kotojs/wiki/API-Documentation).
 
 ### Example Charts
-* [Icicle Chart (github)](https://github.com/nicksrandall/koto.Icicle)
-* More coming soon
+
 
 ## Build Instructions
 Build requirements:
 
-- [Node 0.10+](http://www.nodejs.org)
+- [iojs](https://iojs.org/en/index.html) OR [Node 0.10+](http://www.nodejs.org)
+- [gulp](http://gulpjs.com/)
 
 
 {% highlight bash %}
 $ npm install
-$ npm run build
+$ gulp build
 {% endhighlight %}
 
 ## Community
 The goal is to have a large library of pre-built widgets using this framework open sourced and available for all to use. I'm still thinking through the details but be expecting something to be released soon. If you'd like to contribute a widget (or 2 or 43), I'd welcome the support. 
+
+## Examples
+- Basic Bar Chart (ES2015): [http://bl.ocks.org/nicksrandall/53c6d59ea70afaf19cf1](http://bl.ocks.org/nicksrandall/53c6d59ea70afaf19cf1)
+- Basic Bar Chart (ES5): [http://bl.ocks.org/nicksrandall/58457ea613b84f7544b1](http://bl.ocks.org/nicksrandall/58457ea613b84f7544b1)
+- [Icicle Chart (github)](https://github.com/nicksrandall/koto.Icicle)
+- More coming soon
 
 ## Acknowledgements
 This project is **HEAVILY** inspired by the awesome work done by @jugglinmike and @iros and their charting framework called [d3.chart](https://github.com/misoproject/d3.chart).
