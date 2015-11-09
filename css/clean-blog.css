@@ -16,6 +16,9 @@ p {
 p a {
   text-decoration: underline;
 }
+p a img.img-responsive {
+  display: inline-block;
+}
 p img {
   margin: auto;
 }
