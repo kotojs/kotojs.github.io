@@ -67,7 +67,20 @@ class KotoChartName extends Koto {
 {% endhighlight %}
 
 
-> **Note:** You will never instantiate a new 'Layer' instance directly, you'll use the `Koto.layer` method to create a new layer instance.
+> **Note:** You will most likely *not* instantiate a new 'Layer' instance directly, you'll use the `Koto.layer` method to create a new layer instance.
+> 
+
+### Koto.Layer(base, options)
+Create a layer using the provided `base` selection.
+
+#### Parameters
+
+-   `base` **d3.selection** The containing DOM node for the layer.
+-   `options` **Object** Overrides for databind, insert and event methods.
+    -   `options.databind` **Function** databind override
+    -   `options.insert` **Function** insert override
+    -   `options.events` **[Function]** life-cycle event handler overrides.Possible values are [enter, update, merge, exit] with or without the 'transition postfix'.
+
 
 ### Layer.dataBind(array data)
 This method is invoked by the `Layer.draw` method which is invoked by the `Koto.draw` method. The purpose of this function is to join data to the layer's DOM nodes. This method must be overwritten for each layer instance.

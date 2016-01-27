@@ -15,15 +15,15 @@ class KotoChartName extends Koto {
 > **Best Practices:** It is our recommendation that you name space your charts by prefixing it with `Koto` so if you were making a bar chart, you might name it `KotoBarChart`.
 
 ### Koto.constructor(d3Selection container)
-Here is where you will write most of the code to `initialize` your chart by setting up static things like default configs, scales, and layers. 
+Here is where you will write most of the code to `initialize` your chart by setting up static things like default configs, scales, and layers.
 
 {% highlight javascript %}
 class KotoChartName extends Koto {
   constructor(container){
     super(container);
-    
+
     // initialize configs, scales, layers, ect...
-    
+
   }
 }
 {% endhighlight %}
@@ -64,7 +64,7 @@ demux(name, data) {
 > **Note:** You will most likely never call this method directly, but rather include it as part of a chart definition, and then rely on KotoJS to invoke it when you draw the chart with `Koto.draw`.
 
 ### Koto.preDraw(array data)
-A "hook" method that you may define that will be called after `Koto.transform` and before each of your layers` `draw` method will be called. This is a convenient place to setup chart attributes that are dependent on data (like scales).
+A "hook" method that you may define that will be called after `Koto.transform` and before each of your layers' `draw` method will be called. This is a convenient place to setup chart attributes that are dependent on data (like scales).
 
 {% highlight javascript %}
 preDraw(data) {
@@ -125,7 +125,7 @@ If all three arguments are specified, initialize a new Layer using the specified
 class KotoChartName extends Koto {
   constructor(container){
     super(container);
-    
+
     var layerContainer = this.base.append('g');
     var layer = this.layer('bars', layerContainer, {
       dataBind: function (data) {
@@ -135,7 +135,7 @@ class KotoChartName extends Koto {
         this.append('rect').classed('bars', true)
       }
     });
-    
+
   }
 }
 {% endhighlight %}
@@ -159,10 +159,10 @@ or this can be done from inside a chart's constructor function
 class KotoExtendedChart extends KotoChartName {
   constructor(container){
     super(container);
-    
+
     // remove the 'bars' layer
     this.unlayer('bars');
-    
+
   }
 }
 {% endhighlight %}
@@ -180,11 +180,11 @@ If name and chart is provided then it will attach the given chart with given nam
 class KotoPieBars extends Koto {
   constructor(container){
     super(container);
-    
+
     // initialize composite charts
     var barChart = new KotoBarChart(this.base.append('g'));
     var pieChart = new KotPieChart(this.base.append('g'));
-    
+
     // attach composite charts
     this.attach('bars', barChart);
     this.attach('pie', pieChart);
@@ -211,7 +211,7 @@ chart.draw([1,2,3,4,5,26,47,88]);
 > **Note:** The first time you call this method, the property `hasDrawn` on your chart will be set to true. This is helpful if you want to only run some code on the first time the chart is drawn.
 
 ### Koto.on(string name, function callback, [object context])
-Subscribe a callback function to an event triggered on the chart. See `Kotot#once` to subscribe a callback function to an event for one occurrence. 
+Subscribe a callback function to an event triggered on the chart. See `Kotot#once` to subscribe a callback function to an event for one occurrence.
 
 There are a few preset events that Koto will fire as part of each chart's lifecycle. You can also manually trigger custom events using the `Koto.trigger` method.
 
@@ -247,12 +247,12 @@ chart.draw([1,2,3,4,5,26,47,88]);
 
 
 ### Koto.off([string name, [function callback, [object context]]])
-Unsubscribe one or more callback functions from an event triggered on the chart. 
+Unsubscribe one or more callback functions from an event triggered on the chart.
 
 #### Usage
-* When no arguments are specified, *all* handlers will be unsubscribed. 
-* When only a `name` is specified, all handlers subscribed to that event will be unsubscribed. 
-* When a `name` and `callback` are specified, only that function will be unsubscribed from that event. 
+* When no arguments are specified, *all* handlers will be unsubscribed.
+* When only a `name` is specified, all handlers subscribed to that event will be unsubscribed.
+* When a `name` and `callback` are specified, only that function will be unsubscribed from that event.
 * When a `name` and `context` are specified (but `callback` is omitted), all events bound to the given event with the given context will be unsubscribed.
 
 {% highlight javascript %}
@@ -303,7 +303,7 @@ Getter / Setter for chart's config options. This function operates similar to ho
 var chart = new KotoChartName(d3.select('svg'));
 
 // set config item by name
-chart.config('height', 500); 
+chart.config('height', 500);
 
 // get config item
 chart.config('height') // => 500;
@@ -351,6 +351,36 @@ var name = chart.accessor('name')(data) // => 100;
 
 > **Pro Tip:** This method as been aliased as `Koto.a` for convenience.
 
+### STATIC: Koto.Layer
+We have exposed the internal Layer class so that it can be subclassed for reusing common layers such as a "tooltip" layer.
+
+{% highlight javascript %}
+class TooltipLayer extends Koto.Layer {
+  // extend Layer class
+  otherMethod() {
+    return 'something';
+  }
+}
+
+const tooltipLayer = new TooltipLayer(selection, {
+  dataBind(data, context) {
+    return this.selectAll('rect').data(data);
+  },
+  insert() {
+    return this.append('rect');
+  }
+});
+
+chart.layer('Tooltip', tooltipLayer);
+{% endhighlight %}
+
+> **Pro Tip:** You can use object destructuring to pull Layer out of Koto namespace
+
+{% highlight javascript %}
+const { Layer } = Koto;
+// you now have a variable Layer that is the Layer constructor.
+{% endhighlight %}
+
 ### STATIC: Koto.extend(function | object init)
 This will extend a chart by passing in an initialization function or object with methods that you would like to overwrite from the base chart. Because the constructor method is a reserved method, we have renamed that option to `initialize`.
 
@@ -360,7 +390,7 @@ This will extend a chart by passing in an initialization function or object with
 {% highlight javascript %}
 var ExtendedChart = KotoChartName.extend(function () {
   // this contex is the extended chart.
-  
+
   // initialize chart as you would in a construtor function
 });
 
