@@ -20,7 +20,7 @@ However, as somebody who greatly depends on the d3.chart framework, I've gotten 
 
 {% highlight javascript %}
 // Basic Example
-koto.BarChart = class extends koto.Base {
+class BarChart extends Koto {
 	constructor(selection){
 		// setup chart
     var bars = this.base.append('g').classed('bars', true);
@@ -45,13 +45,13 @@ koto.BarChart = class extends koto.Base {
     .on('exit', function () {
       // this => exit selection
     });
-	}
-	preDraw(data) {
+  }
+  preDraw(data) {
 		// [Optional] Do something before draw
 	}
 }
 
-var barChart = new koto.BarChart(d3.select('#vis'));
+var barChart = new BarChart(d3.select('#vis'));
 barChart.draw(data);
 {% endhighlight %}
 
@@ -68,7 +68,7 @@ In d3.chart, it is a common practice to have each configurable option (ex. Heigh
 
 {% highlight javascript %}
 // Similar syntax to other d3 methods like `attr` and `style`
-var barChart = new koto.BarChart(d3.select('#vis'));
+var barChart = new BarChart(d3.select('#vis'));
 
 barChart
   .config('height', 500)
@@ -90,7 +90,7 @@ In an effort to make components authored with this framework truely reusable, it
 
 {% highlight javascript %}
 // Similar syntax to other d3 methods like `attr` and `style`
-var barChart = new koto.BarChart(d3.select('#vis'));
+var barChart = new BarChart(d3.select('#vis'));
 
 barChart
   .accessor('name', function(d) { return d.country; })
@@ -118,7 +118,7 @@ var barChart = d3.select('#vis').chart('BarChart');
 barChart.draw(data);
 
 // KotoJS
-var barChart = new koto.BarChart(d3.select('#vis'));
+var barChart = new BarChart(d3.select('#vis'));
 barChart.draw(data);
 {% endhighlight %}
 
