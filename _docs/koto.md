@@ -294,6 +294,15 @@ chart.on('acted', function (message) {
 action();
 {% endhighlight %}
 
+### Koto.destory()
+Clean up chart and remove base node from DOM.
+
+{% highlight javascript %}
+var chart = new KotoChartName(d3.select('svg'));
+
+// when done with chart
+chart.destory();
+{% endhighlight %}
 
 ### Koto.config(name, value)
 Getter / Setter for chart's config options. This function operates similar to how d3's `attr` or `style` functions operate.
