@@ -22,9 +22,9 @@ However, as somebody who greatly depends on the d3.chart framework, I've gotten 
 // Basic Example
 class BarChart extends Koto {
   constructor(selection){
-		// setup chart
+    // setup chart
     var bars = this.base.append('g').classed('bars', true);
-    
+
     // define layer
     var layer = this.layer('bars', bars, {
       dataBind: function (data) {
@@ -34,7 +34,7 @@ class BarChart extends Koto {
         this.append('rect');
       }
     });
-  
+
     // Setup life-cycle events on layers
     bars.on('enter', function () {
       // this => enter selection
@@ -47,8 +47,8 @@ class BarChart extends Koto {
     });
   }
   preDraw(data) {
-		// [Optional] Do something before draw
-	}
+    // [Optional] Do something before draw
+  }
 }
 
 var barChart = new BarChart(d3.select('#vis'));
