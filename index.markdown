@@ -21,7 +21,7 @@ However, as somebody who greatly depends on the d3.chart framework, I've gotten 
 {% highlight javascript %}
 // Basic Example
 class BarChart extends Koto {
-	constructor(selection){
+  constructor(selection){
 		// setup chart
     var bars = this.base.append('g').classed('bars', true);
     
