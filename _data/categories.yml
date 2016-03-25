@@ -43,6 +43,9 @@ documentation:
       name: trigger
       url: kototriggerstring-name-args
     - 
+      name: destroy
+      url: kotodestory
+    - 
       name: config
       url: kotoconfigname-value
     - 
